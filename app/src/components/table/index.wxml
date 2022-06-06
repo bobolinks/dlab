@@ -1,0 +1,21 @@
+<view class='discovery' style='align-items: stretch; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; '>
+  <tags bind:action='onTap' name='discovery'></tags>
+  <view wx:if='{{items.length}}' class='list' style='flex: 1 1 auto; '>
+    <view wx:for='{{items}}' wx:for-item='item' wx:for-index='index' class='item' style='display: flex; flex-direction: column; '>
+      <view style='display: flex; flex-direction: row; justify-content: space-between; '>
+        <label class='title'>{{item.name}}</label>
+      </view>
+      <view src='{{item.cover}}' mode='scaleToFill' class='cover'>
+        <label>{{item.gross}}%</label>
+        <label>{{item.cap}}亿</label>
+      </view>
+      <view class='intro' style='display: flex; flex-direction: row;  justify-content: space-between;'>
+        <label>共1234人参与投票</label>
+        <label class='item-amount'>悬赏{{item.rewardAmount}}</label>
+      </view>
+    </view>
+  </view>
+  <view wx:else style='align-items: center; display: flex; flex: 1 1 auto; flex-direction: column; justify-content: center; '>
+    <label>空空如也</label>
+  </view>
+</view>

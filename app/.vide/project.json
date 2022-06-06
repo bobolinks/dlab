@@ -1,0 +1,22 @@
+{
+  "ver": "1.1.1",
+  "props": {
+    "id": "auto",
+    "name": "dlab",
+    "owner": {
+      "openid": ""
+    },
+    "revision": 0,
+    "framework": "wxapp"
+  },
+  "stats": {
+    "atimeMs": 0,
+    "ctimeMs": 0,
+    "mtimeMs": 0
+  },
+  "options": {
+    "framework": "wxapp",
+    "lang": false
+  },
+  "dependencies": {}
+}

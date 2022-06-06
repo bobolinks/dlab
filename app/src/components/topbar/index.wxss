@@ -1,0 +1,96 @@
+.topbar {
+  flex: 0 0 0%;
+  width: 100vw;
+  font-size: 22rpx;
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: #D04453;
+  color: white;
+}
+
+.sysbar {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.search {
+  margin: 0 10rpx;
+  padding: 0 16rpx;
+  background-color: white;
+  border: none;
+  border-radius: 3rem;
+  min-height: 60rpx;
+}
+
+.search input {
+  border: none !important;
+  font-size: 32rpx;
+  font-weight: 500;
+  line-height: 32rpx;
+  margin: 4rpx;
+  vertical-align: middle;
+  border-radius: none !important;
+  background-color: transparent !important;
+  color: #555;
+}
+
+.topbar .title {
+  flex: 1 1 auto;
+  font-size: 48rpx;
+  margin-left: 20rpx;
+  font-weight: 500;
+}
+
+.topbar i {
+  font-size: 48rpx;
+}
+
+.tabits {
+  font-size: 36rpx;
+  justify-content: space-around;
+  background-color: white;
+  color: #222;
+  box-shadow: 0 0 8px 0 lightgray;
+  height: 64rpx;
+  min-height: 64rpx;
+  max-height: 64rpx;
+}
+
+.tabits label {
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tabits .tabit {
+  position: relative;
+  margin: 0 20rpx;
+  border-bottom: 2px solid transparent;
+}
+
+.tabits .tabit[data-selected="true"] {
+  border-color: #ff0033;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

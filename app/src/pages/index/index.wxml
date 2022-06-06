@@ -1,0 +1,6 @@
+<view class='page theme1' style='align-items: stretch; display: flex; flex-direction: column; flex-wrap: nowrap;  '>
+  <topbar name="{{tab}}" bind:search="search"></topbar>
+  <table wx:if="{{tab === 'service'}}" name="{{tab}}" tick="{{tick}}" key="{{key}}" class="container"></table>
+  <table wx:else name="{{tab}}" tick="{{tick}}" key="{{key}}" class="container"></table>
+  <tabs bind:action="onGoto"></tabs>
+</view>
