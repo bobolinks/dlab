@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-throw-literal */
 import { appData } from '../store';
-import { Earn, Mixed, Module, Order, Product, Service, Type } from 'dl/stats';
+import { Earn, Mixed, MixedSet, Module, Order, Product, Service, Type } from 'dl/stats';
 
 const cached: Record<Type, Array<Mixed>> = {
   service: [] as Array<Service>,
@@ -24,7 +24,7 @@ async function fetchData() {
         const { n: name, d: date, } = stock as any;
         const source: Record<string, Earn> = (stock as any)[iterator];
         for (const [ks, s] of Object.entries(source)) {
-          if (s.i < 0 || s.c < 0) {
+          if (!s.i || !s.c || s.i < 0 || s.c < 0 || /其中|其他｜未分配/.test(ks)) {
             continue;
           }
           const sv = mapping[ks] || (mapping[ks] = { name: ks, date: date, sample: 0, gross: 0, cap: 0, income: 0, cost: 0, proportion: [], left: { income: 0, cost: 0, gross: 0 } });
@@ -72,10 +72,13 @@ export async function loadData() {
 }
 
 export default new class implements Module {
-  list(type: Type, key?: MatchKey, order?: Order, count?: number, offset?: number): RecSet<Mixed> {
+  list(type: Type, key?: MatchKey, order?: Order, count?: number, offset?: number): MixedSet {
     const items = key ? cached[type].filter(item => item.name.indexOf(key) !== -1) : cached[type];
-    const rs: RecSet<Mixed> = {
+    const rs: MixedSet = {
       total: items.length,
+      cap: items.reduce((a, b) => a + b.cap, 0),
+      cost: items.reduce((a, b) => a + b.cost, 0),
+      date: items.reduce((a, b) => a.localeCompare(b.date) > 0 ? a : b.date, ''),
       items: [],
     };
     if (!offset) {

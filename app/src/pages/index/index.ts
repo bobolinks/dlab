@@ -10,15 +10,20 @@ Page({
     tab: Object.keys(actions.bottom)[0],
     tick: 0,
     key: '',
+    ready: false,
   },
   onLoad() {
-    // watcher.addListener(this, '*', () => {
-    //   const sdf = Stats.list('service', 'desc', 10, 0);
-    // });
-    // if (appData.ready) {
-    //   const sdf = Stats.list('service', 'desc', 10, 0);
-    // }
-    // console.log('');
+    if (!appData.ready) {
+      watcher.addListener(this, '*', () => {
+        this.setData({
+          ready: appData.ready,
+        });
+      });
+    } else {
+      this.setData({
+        ready: true,
+      });
+    }
   },
   onUnload() {
     watcher.removelistener(this, '*');
@@ -27,6 +32,7 @@ Page({
     this.setData({
       tick: -Date.now(),
     });
+    wx.stopPullDownRefresh();
   },
   onReachBottom() {
     this.setData({

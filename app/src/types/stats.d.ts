@@ -64,8 +64,14 @@ declare module 'dl/stats' {
   type Service = Mixed;
   type Product = Mixed;
 
+  interface MixedSet extends RecSet<Mixed> {
+    cap: number;
+    cost: number;
+    date: string;
+  };
+
   interface Module {
     /** list all items by type */
-    list(type: Type, key?: MatchKey, order?: Order, count?: number, offset?: number): RecSet<Service | Product>;
+    list(type: Type, key?: MatchKey, order?: Order, count?: number, offset?: number): MixedSet;
   }
 }

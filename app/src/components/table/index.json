@@ -1,5 +1,7 @@
 {
   "component": true,
-  "usingComponents": {},
+  "usingComponents": {
+    "Item": "../item/index"
+  },
   "addGlobalClass": true
 }

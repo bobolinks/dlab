@@ -20,7 +20,7 @@ async function fetchData() {
                 const { n: name, d: date, } = stock;
                 const source = stock[iterator];
                 for (const [ks, s] of Object.entries(source)) {
-                    if (s.i < 0 || s.c < 0) {
+                    if (!s.i || !s.c || s.i < 0 || s.c < 0 || /其中|其他｜未分配/.test(ks)) {
                         continue;
                     }
                     const sv = mapping[ks] || (mapping[ks] = { name: ks, date: date, sample: 0, gross: 0, cap: 0, income: 0, cost: 0, proportion: [], left: { income: 0, cost: 0, gross: 0 } });
@@ -71,6 +71,9 @@ export default new class {
         const items = key ? cached[type].filter(item => item.name.indexOf(key) !== -1) : cached[type];
         const rs = {
             total: items.length,
+            cap: items.reduce((a, b) => a + b.cap, 0),
+            cost: items.reduce((a, b) => a + b.cost, 0),
+            date: items.reduce((a, b) => a.localeCompare(b.date) > 0 ? a : b.date, ''),
             items: [],
         };
         if (!offset) {

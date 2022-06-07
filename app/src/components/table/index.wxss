@@ -1,4 +1,4 @@
-.discovery {
+.container {
   height: 100%;
   font-size: 24rpx;
 }
@@ -9,34 +9,35 @@
 }
 
 .item {
-  border-top: 1px solid #f2f2f2;
-  padding: 20rpx;
+  border-bottom: 1px solid #f2f2f2;
 }
 
-.item:first-child {
-  border-top: none;
-}
-
-.item .title {
-  font-size: 28rpx;
-  font-weight: 500;
-}
-
-.item .item-amount {
-  background-color: #ff9900;
+.summary {
+  background-color: #D04453;
   color: white;
-  padding: 4rpx 16rpx;
-  border-radius: 20rpx;
+  min-height: 160rpx;
+  flex: 0 0 0%;
+  display: flex;
+  flex-direction: column;
+  font-size: 48rpx;
+  font-weight: 700;
+  align-items: stretch;
 }
 
-.item .cover {
-  margin: 8rpx 0;
-  border: 1px solid #f2f2f2;
-  border-radius: 16rpx;
-  width: 100%;
-  height: 320rpx;
+.sumcol {
+  position: relative;
+  padding: 10rpx;
 }
 
-.item .intro {
-  color: #777;
+.colTitle {
+  position: absolute;
+  font-size: 18rpx;
+  top: 0.2em;
+  color: #f2f2f2;
+}
+
+.intro {
+  font-size: 18rpx;
+  color: #f2f2f2;
+  padding: 4rpx 10rpx;
 }

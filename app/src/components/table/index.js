@@ -16,12 +16,25 @@ Component({
         key: {
             type: String,
         },
+        limit: {
+            type: Number,
+            value: 1000,
+        },
     },
     data: {
-        items: [],
-        curPage: 0,
-        pageSize: 10,
-        pageCount: 0,
+        items: [{
+                name: 'name',
+                gross: 80,
+                cap: 1,
+                sample: 100,
+            }],
+        ready: false,
+        sum: {
+            gross: '0',
+            cap: '0',
+            sample: 0,
+            date: '',
+        },
     },
     lifetimes: {
         attached() {
@@ -29,39 +42,29 @@ Component({
         },
     },
     observers: {
-        tick(value) {
-            if (value > 0) {
-                if (this.data.pageCount > (this.data.curPage + 1)) {
-                    this.data.curPage += 1;
-                    this.update();
-                }
-            }
-            else {
-                if (this.data.curPage > 0) {
-                    this.data.curPage -= 1;
-                    this.update();
-                }
-            }
-        },
         key(value) {
-            this.data.curPage = 0;
             this.update();
         },
     },
     methods: {
         update() {
-            const rs = Stats.list(this.data.name, this.data.key, 'desc', this.data.pageSize, this.data.curPage * this.data.pageSize);
+            const rs = Stats.list(this.data.name, this.data.key, 'desc', this.data.limit, 0);
             this.setData({
-                items: rs.items.map(e => {
+                items: rs.items.map((e, index) => {
                     return {
                         ...e,
                         gross: (e.gross * 100).toFixed(2),
                         cap: (e.cap / 100000000).toFixed(3),
+                        rank: index + 1,
                     };
                 }),
-                pageCount: rs.total / this.data.pageSize,
+                sum: {
+                    gross: ((1 - rs.cost / rs.cap) * 100).toFixed(2),
+                    cap: (rs.cap / 100000000).toFixed(3),
+                    sample: rs.total,
+                    date: rs.date,
+                },
             });
-            wx.stopPullDownRefresh();
             console.log('updated');
         },
         onTap(event) {

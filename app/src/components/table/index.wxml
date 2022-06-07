@@ -1,21 +1,25 @@
-<view class='discovery' style='align-items: stretch; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; '>
-  <tags bind:action='onTap' name='discovery'></tags>
-  <view wx:if='{{items.length}}' class='list' style='flex: 1 1 auto; '>
-    <view wx:for='{{items}}' wx:for-item='item' wx:for-index='index' class='item' style='display: flex; flex-direction: column; '>
-      <view style='display: flex; flex-direction: row; justify-content: space-between; '>
-        <label class='title'>{{item.name}}</label>
+<view class='container' style='align-items: stretch; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; '>
+  <view class='summary'>
+    <view style='display: flex; flex-direction: row; flex: 1 1 auto; '>
+      <view class='sumcol' style='align-items: center; display: flex; flex-direction: column; justify-content: center; width: 200rpx; '>
+        <label>{{sum.gross}}%</label>
+        <label class='colTitle'>平均毛利率</label>
       </view>
-      <view src='{{item.cover}}' mode='scaleToFill' class='cover'>
-        <label>{{item.gross}}%</label>
-        <label>{{item.cap}}亿</label>
-      </view>
-      <view class='intro' style='display: flex; flex-direction: row;  justify-content: space-between;'>
-        <label>共1234人参与投票</label>
-        <label class='item-amount'>悬赏{{item.rewardAmount}}</label>
+      <view class='sumcol' style='align-items: center; display: flex; flex: 1 1 auto; flex-direction: column; justify-content: center; '>
+        <label>{{sum.cap}}亿</label>
+        <label class='colTitle'>市场规模</label>
       </view>
     </view>
+    <view class="intro" style='align-items: center; display: flex; flex-direction: row; justify-content: space-between; '>
+        <label>最后更新时间：{{sum.date}}</label>
+        <label>共{{sum.sample}}个样本</label>
+    </view>
   </view>
-  <view wx:else style='align-items: center; display: flex; flex: 1 1 auto; flex-direction: column; justify-content: center; '>
+  <view wx:if='{{items.length}}' class='list' style='flex: 1 1 auto; '>
+    <Item wx:for='{{items}}' wx:for-item='item' wx:for-index='index' props='{{item}}' class='item'>
+    </Item>
+  </view>
+  <view wx:else style='align-items: center; display: flex; flex: 1 1 auto; flex-direction: column; height: 100%; justify-content: center; '>
     <label>空空如也</label>
   </view>
 </view>
