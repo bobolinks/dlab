@@ -20,6 +20,6 @@
     </Item>
   </view>
   <view wx:else style='align-items: center; display: flex; flex: 1 1 auto; flex-direction: column; height: 100%; justify-content: center; '>
-    <label>空空如也</label>
+    <label style="margin-top: 100rpx; color: gray;">暂无数据</label>
   </view>
 </view>
