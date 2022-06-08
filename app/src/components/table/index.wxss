@@ -11,33 +11,3 @@
 .item {
   border-bottom: 1px solid #f2f2f2;
 }
-
-.summary {
-  background-color: #D04453;
-  color: white;
-  min-height: 160rpx;
-  flex: 0 0 0%;
-  display: flex;
-  flex-direction: column;
-  font-size: 48rpx;
-  font-weight: 700;
-  align-items: stretch;
-}
-
-.sumcol {
-  position: relative;
-  padding: 10rpx;
-}
-
-.colTitle {
-  position: absolute;
-  font-size: 18rpx;
-  top: 0.2em;
-  color: #f2f2f2;
-}
-
-.intro {
-  font-size: 18rpx;
-  color: #f2f2f2;
-  padding: 4rpx 10rpx;
-}

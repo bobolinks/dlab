@@ -18,7 +18,7 @@ Component({
         },
         limit: {
             type: Number,
-            value: 1000,
+            value: 300,
         },
     },
     data: {
@@ -68,7 +68,9 @@ Component({
             console.log('updated');
         },
         onTap(event) {
-            const name = event.detail;
+            const { index } = event.currentTarget.dataset;
+            const item = this.data.items[index];
+            this.triggerEvent('action', { ...item, gross: parseFloat(item.gross) * 0.01, cap: parseFloat(item.cap) * 100000000 });
         },
     },
 });

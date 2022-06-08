@@ -37,7 +37,7 @@ async function fetchData() {
                 }
             }
             Object.values(mapping).forEach(sv => {
-                sv.proportion.sort((a, b) => b.gross - a.gross);
+                sv.proportion.sort((a, b) => b.income - a.income);
                 sv.gross = 1 - sv.cost / sv.income;
                 sv.proportion.slice(4).forEach(p => {
                     sv.left.income += p.income;
@@ -69,6 +69,7 @@ export async function loadData() {
 export default new class {
     list(type, key, order, count, offset) {
         const items = key ? cached[type].filter(item => item.name.indexOf(key) !== -1) : cached[type];
+        console.time('stats');
         const rs = {
             total: items.length,
             cap: items.reduce((a, b) => a + b.cap, 0),
@@ -76,6 +77,7 @@ export default new class {
             date: items.reduce((a, b) => a.localeCompare(b.date) > 0 ? a : b.date, ''),
             items: [],
         };
+        console.timeEnd('stats');
         if (!offset) {
             offset = 0;
         }

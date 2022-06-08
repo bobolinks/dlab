@@ -41,7 +41,7 @@ async function fetchData() {
         }
       }
       Object.values(mapping).forEach(sv => {
-        sv.proportion.sort((a, b) => b.gross - a.gross);
+        sv.proportion.sort((a, b) => b.income - a.income);
         sv.gross = 1 - sv.cost / sv.income;
         sv.proportion.slice(4).forEach(p => {
           sv.left.income += p.income;
@@ -74,6 +74,7 @@ export async function loadData() {
 export default new class implements Module {
   list(type: Type, key?: MatchKey, order?: Order, count?: number, offset?: number): MixedSet {
     const items = key ? cached[type].filter(item => item.name.indexOf(key) !== -1) : cached[type];
+    console.time('stats');
     const rs: MixedSet = {
       total: items.length,
       cap: items.reduce((a, b) => a + b.cap, 0),
@@ -81,6 +82,7 @@ export default new class implements Module {
       date: items.reduce((a, b) => a.localeCompare(b.date) > 0 ? a : b.date, ''),
       items: [],
     };
+    console.timeEnd('stats');
     if (!offset) {
       offset = 0;
     } else if (offset > items.length) {

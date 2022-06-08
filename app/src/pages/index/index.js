@@ -3,12 +3,11 @@
 import { appData, watcher } from '../../store';
 import { $s } from '../../locales/index';
 import actions from '../../components/tabs/actions';
-// import Stats from '../../modules/stats';
+import { Router } from '../../utils/index';
 Page({
     data: {
         $s,
         tab: Object.keys(actions.bottom)[0],
-        tick: 0,
         key: '',
         ready: false,
     },
@@ -29,17 +28,6 @@ Page({
     onUnload() {
         watcher.removelistener(this, '*');
     },
-    onPullDownRefresh() {
-        this.setData({
-            tick: -Date.now(),
-        });
-        wx.stopPullDownRefresh();
-    },
-    onReachBottom() {
-        this.setData({
-            tick: Date.now(),
-        });
-    },
     onShareAppMessage() {
         return {};
     },
@@ -47,6 +35,11 @@ Page({
         this.setData({
             tab: event.detail,
         });
+    },
+    showDetail(event) {
+        Router.navigateTo({
+            url: '../detail/index',
+        }, { item: event.detail });
     },
     search(event) {
         this.setData({

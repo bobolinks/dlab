@@ -48,7 +48,7 @@ declare module 'dl/stats' {
     income: number;
     /** cost */
     cost: number;
-    /** proportions(ordered) */
+    /** proportions(ordered by income) */
     proportion: Array<Proportion>;
     /** calculated by all proportions without top4(leading enterprise) */
     left: {
