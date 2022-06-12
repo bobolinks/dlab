@@ -1,5 +1,5 @@
 <view class='topbar' style='display: flex; flex-direction: column; '>
-  <view class="sysbar" style='padding-top: {{statusBarHeight}}px; min-height: {{naviPadding}}px; max-height: {{naviPadding}}px;'>
+  <view class="sysbar">
     <i wx:if='{{icon}}' bind:tap='onMain' class='{{icon}}' style='flex: 0 0 none; margin: 0 8rpx; '></i>
     <view wx:if='{{search}}' class='search' style='align-items: center; display: flex; flex: 1 1 auto; flex-direction: row; '>
       <input bind:input='onInput' bind:change='onInput' placeholder='{{$s.tips.input.search}}' style='flex: 1 1 auto; height: 100%; ' />

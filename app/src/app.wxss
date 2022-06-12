@@ -29,6 +29,64 @@ image {
   box-sizing: border-box;
 }
 
+page {
+  --status-bar-min-height: 20px;
+  --status-bar-height: 20px;
+  --navi-bar-height: 44px;
+}
+
+/** iphone x/12 mini/13 mini [Dpr:3] */
+@media screen and (width: 375px) and (height: 812px) {
+  page {
+    --status-bar-min-height: 44px;
+    --status-bar-height: 44px;
+  }
+}
+
+/** iphone XR [Dpr:2] */
+@media screen and (width: 414px) and (height: 896px) {
+  page {
+    --status-bar-min-height: 44px;
+    --status-bar-height: 44px;
+  }
+}
+
+/** iphone XS Max [Dpr:3] */
+@media screen and (width: 414px) and (height: 896px) {
+  page {
+    --status-bar-min-height: 44px;
+    --status-bar-height: 44px;
+  }
+}
+
+/** iphone 12/13 pro [Dpr:3] */
+@media screen and (width: 390px) and (height: 844px) {
+  page {
+    --status-bar-min-height: 47px;
+    --status-bar-height: 47px;
+  }
+}
+
+/** iphone 12/13 pro max [Dpr:3] */
+@media screen and (width: 428px) and (height: 926px) {
+  page {
+    --status-bar-min-height: 47px;
+    --status-bar-height: 47px;
+  }
+}
+
+@supports (top: constant(safe-area-inset-top)) and (not (top: env(safe-area-inset-top))) {
+  page {
+    --status-bar-height: max(constant(safe-area-inset-top), var(--status-bar-min-height));
+  }
+}
+
+@supports (top: env(safe-area-inset-top)) {
+  page {
+    --status-bar-height: max(env(safe-area-inset-top), var(--status-bar-min-height));
+  }
+}
+
 .page {
   min-height: 100vh;
   max-height: 100vh;

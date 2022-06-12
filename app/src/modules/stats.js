@@ -61,6 +61,7 @@ export async function loadData() {
         const pack = JSON.parse(fs.readFileSync(pathCached, 'utf-8'));
         cached.service = pack.service;
         cached.product = pack.product;
+        appData.ready = true;
     }
     catch (_e) {
         await fetchData();

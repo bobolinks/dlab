@@ -104,17 +104,23 @@ export const Utils = {
       }
     }
 
-    let naviHeight = sysInfo.iOS ? 44 : 48;
-    if (wx.canIUse('getMenuButtonBoundingClientRect')) {
-      sysInfo.menuButtonRect = wx.getMenuButtonBoundingClientRect();
-      const boundHeight = ((sysInfo.menuButtonRect.top - sysInfo.statusBarHeight) * 2) + sysInfo.menuButtonRect.height;
-      if (!Number.isNaN(boundHeight)) {
-        naviHeight = boundHeight;
+    if (!sysInfo.naviHeight) {
+      let naviHeight = sysInfo.iOS ? 44 : 48;
+      if (wx.canIUse('getMenuButtonBoundingClientRect')) {
+        sysInfo.menuButtonRect = wx.getMenuButtonBoundingClientRect();
+        const boundHeight = ((sysInfo.menuButtonRect.top - sysInfo.statusBarHeight) * 2) + sysInfo.menuButtonRect.height;
+        if (!Number.isNaN(boundHeight)) {
+          naviHeight = boundHeight;
+        }
       }
+      sysInfo.naviHeight = naviHeight || 44; // 导航栏高度  
     }
-    sysInfo.naviHeight = naviHeight || 44; // 导航栏高度
-    sysInfo.naviPadding = sysInfo.statusBarHeight + naviHeight; // 工具栏 + 导航栏高度
-    sysInfo.backTop = Math.ceil(sysInfo.statusBarHeight + naviHeight / 2.0 - 24 * sysInfo.rpx2px); // 返回按钮的高度
+    if (!sysInfo.naviPadding) {
+      sysInfo.naviPadding = sysInfo.statusBarHeight + sysInfo.naviHeight; // 工具栏 + 导航栏高度
+    }
+    if (!sysInfo.backTop) {
+      sysInfo.backTop = Math.ceil(sysInfo.statusBarHeight + sysInfo.naviHeight / 2.0 - 24 * sysInfo.rpx2px); // 返回按钮的高度
+    }
 
     return sysInfo;
   },
