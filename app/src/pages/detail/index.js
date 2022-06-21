@@ -4,7 +4,7 @@ import { PageWithData } from '../../utils/router';
 PageWithData({
     data: {
         $s,
-        item: {},
+        item: { left: {}, proportion: [] },
         items: [],
         ecData: {
             title: {

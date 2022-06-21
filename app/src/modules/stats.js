@@ -97,6 +97,36 @@ export default new class {
         else {
             rs.items = items.slice(items.length - offset - count, offset + count).reverse();
         }
+        if (key) {
+            const zh = {
+                name: `[${key}综合]`,
+                date: rs.date,
+                sample: items.reduce((a, b) => a + b.sample, 0),
+                gross: 1 - (rs.cost / rs.cap),
+                cap: rs.cap,
+                income: items.reduce((a, b) => a + b.income, 0),
+                cost: rs.cost,
+                proportion: [],
+                left: { income: 0, cost: 0, gross: 0 },
+            };
+            const used = {};
+            items.forEach(e => {
+                e.proportion.forEach(p => {
+                    const po = used[p.symbol] || (used[p.symbol] = { name: p.name, symbol: p.symbol, income: 0, cost: 0, gross: 0 });
+                    po.income += p.income;
+                    po.cost += p.cost;
+                    po.gross = 1 - po.cost / po.income;
+                });
+            });
+            zh.proportion = Object.values(used);
+            zh.proportion.sort((a, b) => b.income - a.income);
+            zh.proportion.slice(4).forEach(p => {
+                zh.left.income += p.income;
+                zh.left.cost += p.cost || 0;
+            });
+            zh.left.gross = 1 - zh.left.cost / zh.left.income;
+            rs.items.splice(0, 0, zh);
+        }
         return rs;
     }
 };

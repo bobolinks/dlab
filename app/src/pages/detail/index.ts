@@ -6,7 +6,7 @@ import { PageWithData } from '../../utils/router';
 PageWithData({
   data: {
     $s,
-    item: {} as any as Mixed,
+    item: { left: {}, proportion: [] } as any as Mixed,
     items: [] as any,
     ecData: {
       title: {
